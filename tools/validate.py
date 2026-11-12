@@ -17,7 +17,8 @@ def main():
     arguments = parse_arguments()
     directories = arguments.directories or discover()
     problems = validate_all(directories, arguments.base)
-    print("\n".join(problems))
+    if problems:
+        print("\n".join(problems))
     return 1 if problems else 0
 
 

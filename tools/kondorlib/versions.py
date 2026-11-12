@@ -28,7 +28,14 @@ def changed_since(repo, base, relative):
     return code, bool(out.strip()), error
 
 
-def check_version_bump(ext_dir, manifest, base, repo):
+def version_problems(version, old, base):
+    if parse_version(version) > parse_version(old):
+        return []
+    return [(MANIFEST, f"version {version} must be greater than {old} on {base}")]
+
+
+def check_version_bump(ext_dir, manifest, baseline):
+    repo, base = baseline
     relative = ext_dir.resolve().relative_to(repo.resolve()).as_posix()
     code, changed, error = changed_since(repo, base, relative)
     if code != 0:
@@ -36,6 +43,4 @@ def check_version_bump(ext_dir, manifest, base, repo):
     old = base_version(repo, base, relative)
     if not changed or old is None:
         return []
-    if parse_version(manifest["version"]) > parse_version(old):
-        return []
-    return [(MANIFEST, f"version {manifest['version']} must be greater than {old} on {base}")]
+    return version_problems(manifest["version"], old, base)

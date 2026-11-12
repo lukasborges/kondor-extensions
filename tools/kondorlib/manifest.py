@@ -26,7 +26,7 @@ def read_manifest(ext_dir):
 
 def check_schema(manifest):
     root = json.loads(SCHEMA_FILE.read_text(encoding="utf-8"))
-    return [(MANIFEST, message) for message in schema.check(manifest, root, "", root)]
+    return [(MANIFEST, message) for message in schema.check(manifest, root)]
 
 
 def check_id(ext_dir, manifest):

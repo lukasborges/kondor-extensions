@@ -25,7 +25,7 @@ def validate_extension(ext_dir, base=None, repo=ROOT):
     if schema_problems:
         return schema_problems + check_sources(ext_dir)
     problems = check_semantics(ext_dir, manifest) + check_sources(ext_dir)
-    return problems + (check_version_bump(ext_dir, manifest, base, repo) if base else [])
+    return problems + (check_version_bump(ext_dir, manifest, (repo, base)) if base else [])
 
 
 def format_problem(ext_dir, problem):

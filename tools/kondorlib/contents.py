@@ -15,11 +15,14 @@ def normalize(name):
     return PurePosixPath(os.path.normpath(name)).as_posix()
 
 
+def files_of_script(index, script):
+    return ((f"contentScripts[{index}].{kind}", name)
+            for kind in ("js", "css") for name in script.get(kind, []))
+
+
 def script_references(manifest):
-    for i, script in enumerate(manifest.get("contentScripts", [])):
-        for kind in ("js", "css"):
-            for name in script.get(kind, []):
-                yield f"contentScripts[{i}].{kind}", name
+    for index, script in enumerate(manifest.get("contentScripts", [])):
+        yield from files_of_script(index, script)
 
 
 def file_references(manifest):

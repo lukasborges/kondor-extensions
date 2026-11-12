@@ -1,0 +1,39 @@
+{
+  "kondor": 1,
+  "id": "dark-mode",
+  "name": "Dark Mode",
+  "name[pt_BR]": "Modo Escuro",
+  "description": "Shows every site with dark colors.",
+  "description[pt_BR]": "Mostra todos os sites com cores escuras.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/dark-mode",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["color.js", "stylesheets.js", "elements.js", "theme.js", "content.js"],
+      "runAt": "document-start",
+      "allFrames": true
+    }
+  ],
+  "settings": [
+    {"key": "brightness", "type": "number", "label": "Brightness", "label[pt_BR]": "Brilho",
+     "default": 100, "min": 50, "max": 150, "step": 5, "suffix": "%"},
+    {"key": "contrast", "type": "number", "label": "Contrast", "label[pt_BR]": "Contraste",
+     "default": 100, "min": 50, "max": 150, "step": 5, "suffix": "%"},
+    {"key": "sepia", "type": "number", "label": "Sepia", "label[pt_BR]": "Sépia",
+     "default": 0, "min": 0, "max": 100, "step": 5, "suffix": "%"},
+    {"key": "onlyWhenSystemDark", "type": "bool",
+     "label": "Only when the system uses a dark color scheme",
+     "label[pt_BR]": "Somente quando o sistema usa um esquema de cores escuro",
+     "default": false}
+  ],
+  "action": {
+    "items": [
+      {"id": "dim-images", "title": "Dim Images", "title[pt_BR]": "Escurecer Imagens", "checkable": true}
+    ],
+    "siteToggle": true
+  }
+}

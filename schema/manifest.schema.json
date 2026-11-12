@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lukasborges.github.io/kondor-extensions/manifest.schema.json",
+  "title": "Kondor extension manifest (API version 1)",
+  "type": "object",
+  "required": ["kondor", "id", "name", "description", "version", "author", "license", "icon"],
+  "properties": {
+    "kondor": {"const": 1},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,47}$"},
+    "name": {"$ref": "#/$defs/text"},
+    "description": {"$ref": "#/$defs/text"},
+    "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "author": {"$ref": "#/$defs/text"},
+    "homepage": {"type": "string", "pattern": "^https?://"},
+    "license": {"$ref": "#/$defs/text"},
+    "icon": {"$ref": "#/$defs/text"},
+    "permissions": {"type": "array", "items": {"enum": ["tabs", "downloads", "notifications"]}},
+    "contentScripts": {"type": "array", "items": {"$ref": "#/$defs/contentScript"}},
+    "settings": {"type": "array", "items": {"$ref": "#/$defs/setting"}},
+    "action": {"$ref": "#/$defs/action"}
+  },
+  "patternProperties": {
+    "^(name|description)\\[[A-Za-z0-9_@.-]+\\]$": {"$ref": "#/$defs/text"}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "files": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "matchPattern": {
+      "type": "string",
+      "pattern": "^(<all_urls>|(\\*|https?)://(\\*|\\*\\.[^/*]+|[^/*]+)/.*|file:///.*)$"
+    },
+    "contentScript": {
+      "type": "object",
+      "required": ["matches"],
+      "properties": {
+        "matches": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/matchPattern"}},
+        "exclude": {"type": "array", "items": {"$ref": "#/$defs/matchPattern"}},
+        "js": {"$ref": "#/$defs/files"},
+        "css": {"$ref": "#/$defs/files"},
+        "runAt": {"enum": ["document-start", "document-end", "document-idle"]},
+        "allFrames": {"type": "boolean"}
+      }
+    },
+    "setting": {
+      "type": "object",
+      "required": ["key", "type", "label", "default"],
+      "properties": {
+        "key": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"},
+        "type": {"enum": ["bool", "number", "string", "text", "choice", "color", "keys"]},
+        "label": {"$ref": "#/$defs/text"},
+        "min": {"type": "number"},
+        "max": {"type": "number"},
+        "step": {"type": "number"},
+        "suffix": {"type": "string"},
+        "choices": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/choice"}}
+      },
+      "patternProperties": {
+        "^label\\[[A-Za-z0-9_@.-]+\\]$": {"$ref": "#/$defs/text"}
+      }
+    },
+    "choice": {
+      "type": "object",
+      "required": ["value", "label"],
+      "properties": {"label": {"$ref": "#/$defs/text"}},
+      "patternProperties": {
+        "^label\\[[A-Za-z0-9_@.-]+\\]$": {"$ref": "#/$defs/text"}
+      }
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "items": {"type": "array", "items": {"$ref": "#/$defs/actionItem"}},
+        "siteToggle": {"type": "boolean"}
+      }
+    },
+    "actionItem": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$"},
+        "title": {"$ref": "#/$defs/text"},
+        "checkable": {"type": "boolean"},
+        "icon": {"$ref": "#/$defs/text"}
+      },
+      "patternProperties": {
+        "^title\\[[A-Za-z0-9_@.-]+\\]$": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}

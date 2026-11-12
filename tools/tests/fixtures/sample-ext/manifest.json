@@ -1,0 +1,24 @@
+{
+  "kondor": 1,
+  "id": "sample-ext",
+  "name": "Sample Extension",
+  "name[pt_BR]": "Extensão de Exemplo",
+  "description": "Highlights links on every page.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "permissions": ["tabs"],
+  "contentScripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "runAt": "document-start"
+    }
+  ],
+  "settings": [
+    {"key": "enabled", "type": "bool", "label": "Highlight links", "default": true}
+  ],
+  "action": {"items": [{"id": "toggle", "title": "Toggle", "checkable": true}], "siteToggle": true}
+}

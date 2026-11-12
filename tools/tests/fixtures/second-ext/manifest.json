@@ -1,0 +1,13 @@
+{
+  "kondor": 1,
+  "id": "second-ext",
+  "name": "Second Extension",
+  "description": "Does nothing special.",
+  "version": "0.2.0",
+  "author": "Someone",
+  "license": "MIT",
+  "icon": "icon.png",
+  "contentScripts": [
+    {"matches": ["https://*/*", "*://*.example.com/*"], "js": ["main.js"]}
+  ]
+}

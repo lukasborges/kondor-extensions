@@ -1,0 +1,45 @@
+{
+  "kondor": 1,
+  "id": "video-speed",
+  "name": "Video Speed Controller",
+  "name[pt_BR]": "Controle de Velocidade de Vídeo",
+  "description": "Changes the playback speed of any video.",
+  "description[pt_BR]": "Muda a velocidade de reprodução de qualquer vídeo.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/video-speed",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["keys.js", "speed.js", "overlay.js", "videos.js", "content.js"],
+      "runAt": "document-start",
+      "allFrames": true
+    }
+  ],
+  "settings": [
+    {"key": "speedStep", "type": "number", "label": "Speed step", "label[pt_BR]": "Passo da velocidade",
+     "default": 10, "min": 5, "max": 50, "step": 5, "suffix": "%"},
+    {"key": "skipSeconds", "type": "number", "label": "Rewind and advance by", "label[pt_BR]": "Voltar e avançar",
+     "default": 10, "min": 1, "max": 60, "step": 1, "suffix": " s"},
+    {"key": "rememberSpeed", "type": "bool", "label": "Remember the speed for each site",
+     "label[pt_BR]": "Lembrar a velocidade de cada site", "default": false},
+    {"key": "keySlower", "type": "keys", "label": "Slower", "label[pt_BR]": "Mais lento", "default": "S"},
+    {"key": "keyFaster", "type": "keys", "label": "Faster", "label[pt_BR]": "Mais rápido", "default": "D"},
+    {"key": "keyReset", "type": "keys", "label": "Reset speed", "label[pt_BR]": "Velocidade normal", "default": "R"},
+    {"key": "keyRewind", "type": "keys", "label": "Rewind", "label[pt_BR]": "Voltar", "default": "Z"},
+    {"key": "keyAdvance", "type": "keys", "label": "Advance", "label[pt_BR]": "Avançar", "default": "X"},
+    {"key": "keyOverlay", "type": "keys", "label": "Show or hide the overlay",
+     "label[pt_BR]": "Mostrar ou ocultar o indicador", "default": "V"}
+  ],
+  "action": {
+    "items": [
+      {"id": "slower", "title": "Slower", "title[pt_BR]": "Mais Lento"},
+      {"id": "faster", "title": "Faster", "title[pt_BR]": "Mais Rápido"},
+      {"id": "reset", "title": "Reset Speed", "title[pt_BR]": "Velocidade Normal"},
+      {"id": "show-overlay", "title": "Show Speed Overlay", "title[pt_BR]": "Mostrar Indicador de Velocidade", "checkable": true}
+    ],
+    "siteToggle": true
+  }
+}

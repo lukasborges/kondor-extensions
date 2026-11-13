@@ -1,4 +1,5 @@
 import os
+import re
 import struct
 from pathlib import PurePosixPath
 
@@ -9,6 +10,7 @@ MAX_BYTES = 5 * 1024 * 1024
 MAX_FILES = 200
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 ICON_SIZE = (128, 128)
+FULL_SIZE = ("64", "100%")
 
 
 def normalize(name):
@@ -80,10 +82,30 @@ def png_size(data):
     return struct.unpack(">II", data[16:24])
 
 
+def first_drawn_element(svg):
+    return re.search(r"<(rect|circle|ellipse|path|polygon|g)\b[^>]*>", svg)
+
+
+def covers_view_box(element):
+    attributes = dict(re.findall(r'([\w-]+)="([^"]*)"', element.group(0)))
+    return (element.group(1) == "rect" and attributes.get("width") in FULL_SIZE
+            and attributes.get("height") in FULL_SIZE
+            and attributes.get("x", "0") == "0" and attributes.get("y", "0") == "0")
+
+
+def svg_problem(svg):
+    if "<svg" not in svg:
+        return "is not a valid SVG"
+    element = first_drawn_element(svg)
+    if element and covers_view_box(element):
+        return "must not start with a rectangle covering the whole view box"
+    return None
+
+
 def icon_problem(path):
     data = path.read_bytes()
     if path.suffix.lower() == ".svg":
-        return None if b"<svg" in data else "is not a valid SVG"
+        return svg_problem(data.decode("utf-8", errors="replace"))
     if path.suffix.lower() == ".png":
         return None if png_size(data) == ICON_SIZE else "must be a PNG of 128x128 pixels"
     return "must be an SVG or a PNG of 128x128 pixels"

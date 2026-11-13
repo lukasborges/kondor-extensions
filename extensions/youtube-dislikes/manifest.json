@@ -5,7 +5,7 @@
   "name[pt_BR]": "Contagem de Não Gostei do YouTube",
   "description": "Shows dislike counts on YouTube videos and Shorts.",
   "description[pt_BR]": "Mostra a contagem de \"não gostei\" em vídeos e Shorts do YouTube.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Kondor contributors",
   "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/youtube-dislikes",
   "license": "GPL-3.0-or-later",

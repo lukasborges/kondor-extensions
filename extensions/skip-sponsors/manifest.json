@@ -5,7 +5,7 @@
   "name[pt_BR]": "Pular Patrocínios",
   "description": "Skips sponsored segments and intros in YouTube videos.",
   "description[pt_BR]": "Pula patrocínios e introduções em vídeos do YouTube.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Kondor contributors",
   "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/skip-sponsors",
   "license": "GPL-3.0-or-later",

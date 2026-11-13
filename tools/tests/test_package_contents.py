@@ -56,6 +56,20 @@ class PackageContentsTest(support.ExtensionTestCase):
         self.edit_manifest(directory, icon="icon.gif")
         self.assertProblem(directory, "must be an SVG or a PNG")
 
+    def test_rejects_svg_icon_with_full_size_background(self):
+        directory = self.install()
+        (directory / "icon.svg").write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+            '<rect width="64" height="64" rx="12" fill="#232629"/></svg>')
+        self.assertProblem(directory, "must not start with a rectangle covering the whole view box")
+
+    def test_accepts_svg_icon_starting_with_small_rectangle(self):
+        directory = self.install()
+        (directory / "icon.svg").write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+            '<rect x="8" y="8" width="20" height="20"/></svg>')
+        self.assertEqual(self.messages(directory), [])
+
 
 if __name__ == "__main__":
     unittest.main()

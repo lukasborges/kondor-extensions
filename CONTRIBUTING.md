@@ -34,6 +34,17 @@ Each rule exists so that the maintainer can review everything an extension does.
 
 Every extension has a `README.md` with the sections "What it does", "Permissions" and "Network".
 
+## Icons
+
+The icon is drawn for a toolbar button and a list row, on light and dark color schemes:
+
+- **No background.** Draw only the symbol on a transparent 64 × 64 view box; an `icon.svg` whose
+  first drawn element is a rectangle covering the whole view box is rejected.
+- **Legible at 16 px.** Use thick shapes, with no thin lines or small details.
+- **Colors that work on both schemes.** Use the Breeze palette (for example `#3daee9`, `#fdbc4b`,
+  `#da4453`, `#27ae60`) and avoid black or white fills that disappear on one background.
+- **Original artwork.**
+
 ## Review
 
 The maintainer checks the behavior, the permissions, the network use and the privacy impact, and

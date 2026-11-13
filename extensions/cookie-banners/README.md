@@ -5,7 +5,7 @@
 Hides the cookie consent banners of OneTrust, Cookiebot, Didomi, Quantcast, TrustArc,
 Usercentrics, Sourcepoint, Funding Choices, Complianz and CookieYes, and restores page scrolling.
 When the platform has a "Reject all" or "Only necessary" button, it clicks it once per page.
-Quantcast only gets hidden.
+Quantcast and Funding Choices only get hidden.
 
 - "Hide banners only, never click" hides the banners without clicking anything.
 - "Run on <site>" turns it off for a site that breaks.

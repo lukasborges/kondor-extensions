@@ -1,0 +1,44 @@
+{
+  "kondor": 1,
+  "id": "cookie-banners",
+  "name": "Cookie Banner Blocker",
+  "name[pt_BR]": "Bloqueador de Avisos de Cookies",
+  "description": "Rejects or hides cookie consent banners.",
+  "description[pt_BR]": "Recusa ou oculta avisos de consentimento de cookies.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/cookie-banners",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": [
+        "rules.js",
+        "rules/complianz.js",
+        "rules/cookiebot.js",
+        "rules/cookieyes.js",
+        "rules/didomi.js",
+        "rules/funding-choices.js",
+        "rules/onetrust.js",
+        "rules/quantcast.js",
+        "rules/sourcepoint.js",
+        "rules/trustarc.js",
+        "rules/usercentrics.js",
+        "hiding.js",
+        "scrolling.js",
+        "rejecting.js",
+        "content.js"
+      ],
+      "runAt": "document-start",
+      "allFrames": true
+    }
+  ],
+  "settings": [
+    {"key": "hideOnly", "type": "bool", "label": "Hide banners only, never click",
+     "label[pt_BR]": "Apenas ocultar os avisos, nunca clicar", "default": false}
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

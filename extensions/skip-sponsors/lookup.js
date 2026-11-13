@@ -66,7 +66,7 @@ function hasActiveCategory(values) {
   return CATEGORIES.some((category) => values[category.id] !== "ignore");
 }
 
-async function loadSegments(videoId) {
-  if (!segmentsByVideo.has(videoId)) segmentsByVideo.set(videoId, await fetchSegments(videoId));
+function loadSegments(videoId) {
+  if (!segmentsByVideo.has(videoId)) segmentsByVideo.set(videoId, fetchSegments(videoId));
   return segmentsByVideo.get(videoId);
 }

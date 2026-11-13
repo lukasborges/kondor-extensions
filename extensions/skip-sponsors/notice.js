@@ -46,18 +46,23 @@ function showNotice(labelText, button) {
   notice.host.style.display = "";
 }
 
-function hideNotice() {
+function stopNoticeTimer() {
   clearTimeout(notice.timer);
   notice.timer = null;
+}
+
+function hideNotice() {
+  stopNoticeTimer();
   if (notice.host) notice.host.style.display = "none";
 }
 
 function showSkipButton(categoryId, onClick) {
+  stopNoticeTimer();
   showNotice(null, createNoticeButton(textFor("skip", categoryId), onClick));
 }
 
 function showSkippedNotice(categoryId, onUndo) {
-  clearTimeout(notice.timer);
+  stopNoticeTimer();
   showNotice(textFor("skipped", categoryId), createNoticeButton(textFor("undo"), onUndo));
   notice.timer = setTimeout(hideNotice, NOTICE_SECONDS * 1000);
 }

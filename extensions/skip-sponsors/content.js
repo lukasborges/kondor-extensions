@@ -91,8 +91,13 @@ function handleNavigation() {
 }
 
 function handleMetadataEvent(event) {
-  if (isPlayerEvent(event)) handleNavigation();
+  if (!isPlayerEvent(event)) return;
+  handleNavigation();
   redrawMarks();
+}
+
+function handleDurationEvent(event) {
+  if (isPlayerEvent(event)) redrawMarks();
 }
 
 function changeSettings(values) {
@@ -105,7 +110,7 @@ function changeSettings(values) {
 handleNavigation();
 document.addEventListener("yt-navigate-finish", handleNavigation);
 document.addEventListener("loadedmetadata", handleMetadataEvent, true);
-document.addEventListener("durationchange", redrawMarks, true);
+document.addEventListener("durationchange", handleDurationEvent, true);
 document.addEventListener("timeupdate", handlePlaybackEvent, true);
 document.addEventListener("seeked", handlePlaybackEvent, true);
 kondor.settings.onChanged(changeSettings);

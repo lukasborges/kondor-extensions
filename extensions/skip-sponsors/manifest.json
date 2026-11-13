@@ -1,0 +1,203 @@
+{
+  "kondor": 1,
+  "id": "skip-sponsors",
+  "name": "Skip Sponsors",
+  "name[pt_BR]": "Pular Patrocínios",
+  "description": "Skips sponsored segments and intros in YouTube videos.",
+  "description[pt_BR]": "Pula patrocínios e introduções em vídeos do YouTube.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/skip-sponsors",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "categories.js",
+        "lookup.js",
+        "segments.js",
+        "markers.js",
+        "notice.js",
+        "content.js"
+      ],
+      "runAt": "document-end",
+      "allFrames": false
+    }
+  ],
+  "settings": [
+    {
+      "key": "sponsor",
+      "type": "choice",
+      "label": "Sponsor",
+      "label[pt_BR]": "Patrocínio",
+      "default": "skip",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "selfpromo",
+      "type": "choice",
+      "label": "Self-promotion",
+      "label[pt_BR]": "Autopromoção",
+      "default": "button",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "interaction",
+      "type": "choice",
+      "label": "Interaction reminder (subscribe, like)",
+      "label[pt_BR]": "Lembrete de interação (inscrever-se, curtir)",
+      "default": "button",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "intro",
+      "type": "choice",
+      "label": "Intro",
+      "label[pt_BR]": "Introdução",
+      "default": "ignore",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "outro",
+      "type": "choice",
+      "label": "Outro (end cards, credits)",
+      "label[pt_BR]": "Encerramento (telas finais, créditos)",
+      "default": "ignore",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "preview",
+      "type": "choice",
+      "label": "Preview or recap",
+      "label[pt_BR]": "Prévia ou recapitulação",
+      "default": "ignore",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    },
+    {
+      "key": "filler",
+      "type": "choice",
+      "label": "Filler or tangent",
+      "label[pt_BR]": "Enrolação ou digressão",
+      "default": "ignore",
+      "choices": [
+        {
+          "value": "skip",
+          "label": "Skip automatically",
+          "label[pt_BR]": "Pular automaticamente"
+        },
+        {
+          "value": "button",
+          "label": "Show a Skip button",
+          "label[pt_BR]": "Mostrar um botão Pular"
+        },
+        {
+          "value": "ignore",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        }
+      ]
+    }
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

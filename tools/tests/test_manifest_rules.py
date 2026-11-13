@@ -59,6 +59,33 @@ class ManifestRulesTest(support.ExtensionTestCase):
         self.edit_manifest(directory, settings=[setting])
         self.assertProblem(directory, "settings[0].choices: is required")
 
+    def edit_toggle(self, directory, keys_setting, extra_settings=()):
+        manifest = json.loads((directory / "manifest.json").read_text())
+        manifest["settings"] += list(extra_settings)
+        manifest["action"]["items"][0]["keysSetting"] = keys_setting
+        (directory / "manifest.json").write_text(json.dumps(manifest))
+
+    def test_accepts_keys_setting_naming_a_keys_setting(self):
+        directory = self.install()
+        keys = {"key": "keyToggle", "type": "keys", "label": "Toggle", "default": "T"}
+        self.edit_toggle(directory, "keyToggle", [keys])
+        self.assertEqual(self.messages(directory), [])
+
+    def test_rejects_keys_setting_naming_no_setting(self):
+        directory = self.install()
+        self.edit_toggle(directory, "missing")
+        self.assertProblem(directory, "action.items[0].keysSetting: must name a keys setting")
+
+    def test_rejects_keys_setting_naming_another_type(self):
+        directory = self.install()
+        self.edit_toggle(directory, "enabled")
+        self.assertProblem(directory, "action.items[0].keysSetting: must name a keys setting")
+
+    def test_rejects_keys_setting_with_bad_pattern(self):
+        directory = self.install()
+        self.edit_toggle(directory, "1x")
+        self.assertProblem(directory, "action.items[0].keysSetting")
+
     def test_accepts_translated_keys_only_as_strings(self):
         directory = self.install()
         self.edit_manifest(directory, **{"name[pt_BR]": 3})

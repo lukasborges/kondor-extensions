@@ -80,7 +80,8 @@
         "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$"},
         "title": {"$ref": "#/$defs/text"},
         "checkable": {"type": "boolean"},
-        "icon": {"$ref": "#/$defs/text"}
+        "icon": {"$ref": "#/$defs/text"},
+        "keysSetting": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$"}
       },
       "patternProperties": {
         "^title\\[[A-Za-z0-9_@.-]+\\]$": {"$ref": "#/$defs/text"}

@@ -38,12 +38,11 @@ function cancelTracking() {
 }
 
 function extendSession(session, point) {
+  const { values, directions } = session;
+  const isNewDirection = addPointToDirections(directions, point, values.minimumDistance);
   if (session.trail) return extendTrail(session.trail, point);
   session.points.push(point);
-  const { values, directions } = session;
-  if (addPointToDirections(directions, point, values.minimumDistance)) {
-    session.trail = createTrail(values.trailColor, session.points);
-  }
+  if (isNewDirection) session.trail = createTrail(values.trailColor, session.points);
 }
 
 function rememberPlainClick(event) {

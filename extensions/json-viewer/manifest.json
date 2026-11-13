@@ -1,0 +1,36 @@
+{
+  "kondor": 1,
+  "id": "json-viewer",
+  "name": "JSON Viewer",
+  "name[pt_BR]": "Visualizador de JSON",
+  "description": "Shows JSON documents as a readable, collapsible tree.",
+  "description[pt_BR]": "Mostra documentos JSON como uma árvore legível e recolhível.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/json-viewer",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "texts.js",
+        "detect.js",
+        "parse.js",
+        "styles.js",
+        "tree.js",
+        "keyboard.js",
+        "clipboard.js",
+        "toolbar.js",
+        "content.js"
+      ],
+      "runAt": "document-end",
+      "allFrames": false
+    }
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

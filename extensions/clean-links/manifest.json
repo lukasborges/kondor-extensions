@@ -1,0 +1,36 @@
+{
+  "kondor": 1,
+  "id": "clean-links",
+  "name": "Clean Links",
+  "name[pt_BR]": "Links Limpos",
+  "description": "Removes tracking parameters from links and addresses.",
+  "description[pt_BR]": "Remove parâmetros de rastreamento de links e endereços.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/clean-links",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": [
+        "rules.js",
+        "settings.js",
+        "cleaning.js",
+        "unwrapping.js",
+        "content.js"
+      ],
+      "runAt": "document-start",
+      "allFrames": false
+    }
+  ],
+  "settings": [
+    {"key": "extraParameters", "type": "text", "label": "Extra parameters to remove:",
+     "label[pt_BR]": "Parâmetros extras a remover:", "default": ""},
+    {"key": "keptSites", "type": "text", "label": "Sites to leave alone:",
+     "label[pt_BR]": "Sites a não alterar:", "default": ""}
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

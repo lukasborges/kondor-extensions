@@ -1,0 +1,41 @@
+{
+  "kondor": 1,
+  "id": "youtube-dislikes",
+  "name": "YouTube Dislike Counts",
+  "name[pt_BR]": "Contagem de Não Gostei do YouTube",
+  "description": "Shows dislike counts on YouTube videos and Shorts.",
+  "description[pt_BR]": "Mostra a contagem de \"não gostei\" em vídeos e Shorts do YouTube.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/youtube-dislikes",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "texts.js",
+        "lookup.js",
+        "watch.js",
+        "shorts.js",
+        "content.js"
+      ],
+      "runAt": "document-end",
+      "allFrames": false
+    }
+  ],
+  "settings": [
+    {
+      "key": "showRatioBar",
+      "type": "bool",
+      "label": "Show the like/dislike ratio bar",
+      "label[pt_BR]": "Mostrar a barra de proporção entre gostei e não gostei",
+      "default": true
+    }
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

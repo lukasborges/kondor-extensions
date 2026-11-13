@@ -1,0 +1,528 @@
+{
+  "kondor": 1,
+  "id": "mouse-gestures",
+  "name": "Mouse Gestures",
+  "name[pt_BR]": "Gestos do Mouse",
+  "description": "Navigates by drawing with the right mouse button held down.",
+  "description[pt_BR]": "Navega desenhando com o botão direito do mouse pressionado.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/mouse-gestures",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "permissions": [
+    "tabs"
+  ],
+  "contentScripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "directions.js",
+        "actions.js",
+        "trail.js",
+        "tracking.js",
+        "content.js"
+      ],
+      "runAt": "document-start",
+      "allFrames": false
+    }
+  ],
+  "settings": [
+    {
+      "key": "left",
+      "type": "choice",
+      "label": "Drag left",
+      "label[pt_BR]": "Arrastar para a esquerda",
+      "default": "back",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "type": "choice",
+      "label": "Drag right",
+      "label[pt_BR]": "Arrastar para a direita",
+      "default": "forward",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "up",
+      "type": "choice",
+      "label": "Drag up",
+      "label[pt_BR]": "Arrastar para cima",
+      "default": "scrollTop",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "down",
+      "type": "choice",
+      "label": "Drag down",
+      "label[pt_BR]": "Arrastar para baixo",
+      "default": "duplicateTab",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "upDown",
+      "type": "choice",
+      "label": "Drag up, then down",
+      "label[pt_BR]": "Arrastar para cima e depois para baixo",
+      "default": "reload",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "downUp",
+      "type": "choice",
+      "label": "Drag down, then up",
+      "label[pt_BR]": "Arrastar para baixo e depois para cima",
+      "default": "none",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "downRight",
+      "type": "choice",
+      "label": "Drag down, then right",
+      "label[pt_BR]": "Arrastar para baixo e depois para a direita",
+      "default": "closeTab",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "downLeft",
+      "type": "choice",
+      "label": "Drag down, then left",
+      "label[pt_BR]": "Arrastar para baixo e depois para a esquerda",
+      "default": "none",
+      "choices": [
+        {
+          "value": "none",
+          "label": "Do nothing",
+          "label[pt_BR]": "Não fazer nada"
+        },
+        {
+          "value": "back",
+          "label": "Go back",
+          "label[pt_BR]": "Voltar"
+        },
+        {
+          "value": "forward",
+          "label": "Go forward",
+          "label[pt_BR]": "Avançar"
+        },
+        {
+          "value": "reload",
+          "label": "Reload",
+          "label[pt_BR]": "Recarregar"
+        },
+        {
+          "value": "closeTab",
+          "label": "Close tab",
+          "label[pt_BR]": "Fechar aba"
+        },
+        {
+          "value": "duplicateTab",
+          "label": "Duplicate tab",
+          "label[pt_BR]": "Duplicar aba"
+        },
+        {
+          "value": "nextTab",
+          "label": "Next tab",
+          "label[pt_BR]": "Próxima aba"
+        },
+        {
+          "value": "previousTab",
+          "label": "Previous tab",
+          "label[pt_BR]": "Aba anterior"
+        },
+        {
+          "value": "scrollTop",
+          "label": "Scroll to top",
+          "label[pt_BR]": "Rolar até o topo"
+        },
+        {
+          "value": "scrollBottom",
+          "label": "Scroll to bottom",
+          "label[pt_BR]": "Rolar até o final"
+        }
+      ]
+    },
+    {
+      "key": "trailColor",
+      "type": "color",
+      "label": "Trail color",
+      "label[pt_BR]": "Cor do rastro",
+      "default": "#3daee9"
+    },
+    {
+      "key": "minimumDistance",
+      "type": "number",
+      "label": "Minimum stroke length",
+      "label[pt_BR]": "Comprimento mínimo do traço",
+      "default": 20,
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "suffix": " px"
+    }
+  ],
+  "action": {
+    "siteToggle": true
+  }
+}

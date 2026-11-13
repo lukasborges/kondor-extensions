@@ -1,0 +1,51 @@
+{
+  "kondor": 1,
+  "id": "user-styles",
+  "name": "User Styles",
+  "name[pt_BR]": "Estilos do Usuário",
+  "description": "Restyles websites with your own CSS.",
+  "description[pt_BR]": "Muda a aparência dos sites com o seu próprio CSS.",
+  "version": "1.0.0",
+  "author": "Kondor contributors",
+  "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/user-styles",
+  "license": "GPL-3.0-or-later",
+  "icon": "icon.svg",
+  "contentScripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "texts.js",
+        "metadata.js",
+        "sections.js",
+        "matching.js",
+        "store.js",
+        "panel.js",
+        "editor.js",
+        "manager.js",
+        "installer.js",
+        "content.js"
+      ],
+      "runAt": "document-start",
+      "allFrames": false
+    }
+  ],
+  "action": {
+    "siteToggle": true,
+    "items": [
+      {
+        "id": "edit-style",
+        "title": "Edit Style for This Site…",
+        "title[pt_BR]": "Editar Estilo deste Site…",
+        "icon": "document-edit"
+      },
+      {
+        "id": "manage-styles",
+        "title": "Manage Styles…",
+        "title[pt_BR]": "Gerenciar Estilos…",
+        "icon": "configure"
+      }
+    ]
+  }
+}

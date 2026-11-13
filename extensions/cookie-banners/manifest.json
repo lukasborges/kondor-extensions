@@ -5,7 +5,7 @@
   "name[pt_BR]": "Bloqueador de Avisos de Cookies",
   "description": "Rejects or hides cookie consent banners.",
   "description[pt_BR]": "Recusa ou oculta avisos de consentimento de cookies.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Kondor contributors",
   "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/cookie-banners",
   "license": "GPL-3.0-or-later",

@@ -118,7 +118,7 @@ function createPanelView(title) {
   body.append(messages);
   frame.append(createHeader(title), body, footer);
   const host = createPanelHost(frame);
-  return { host, body, messages, footer, isDirty: () => false, askDiscard: () => {}, dismiss: closePanel };
+  return { host, body, messages, footer, isDirty: () => false, leave: () => {}, askDiscard: () => {}, dismiss: closePanel };
 }
 
 function openPanel(title) {
@@ -147,5 +147,8 @@ function requestClose() {
 function switchView(openView) {
   const view = panelState.view;
   if (view && view.isDirty()) view.askDiscard(openView);
-  else openView();
+  else {
+    if (view) view.leave();
+    openView();
+  }
 }

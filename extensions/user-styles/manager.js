@@ -44,6 +44,7 @@ function createCheckbox(manager, style) {
   checkbox.type = "checkbox";
   checkbox.checked = style.enabled;
   checkbox.disabled = kondor.isPrivate;
+  checkbox.setAttribute("aria-label", style.name);
   checkbox.addEventListener("change", () => toggleStyle(manager, checkbox, style.id));
   return checkbox;
 }
@@ -52,9 +53,9 @@ function createOption(manager, style, index) {
   const option = createNode("li", style.enabled ? "option" : "option off", "");
   setAttributes(option, { role: "option", id: "style-" + index, "aria-selected": "false" });
   option.dataset.styleId = style.id;
-  const label = createNode("label", "name-row", "");
-  label.append(createCheckbox(manager, style), createNode("span", "name", style.name));
-  option.append(label, createNode("div", "sites", summarizeSites(style)));
+  const row = createNode("div", "name-row", "");
+  row.append(createCheckbox(manager, style), createNode("span", "name", style.name));
+  option.append(row, createNode("div", "sites", summarizeSites(style)));
   return option;
 }
 

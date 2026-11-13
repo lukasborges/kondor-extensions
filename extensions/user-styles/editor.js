@@ -86,6 +86,7 @@ function createEditorField(editor) {
 function wireEditorView(editor) {
   editor.view.isDirty = () => !kondor.isPrivate && isEditorChanged(editor);
   editor.view.askDiscard = (proceed) => askDiscard(editor, proceed);
+  editor.view.leave = () => restoreSaved(editor);
   editor.view.dismiss = () => dismissEditor(editor);
 }
 

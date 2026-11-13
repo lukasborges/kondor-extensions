@@ -49,6 +49,19 @@ def check_choice_settings(manifest):
     return problems
 
 
+def keys_setting_names(manifest):
+    return {setting["key"] for setting in manifest.get("settings", [])
+            if setting["type"] == "keys"}
+
+
+def check_keys_settings(manifest):
+    names = keys_setting_names(manifest)
+    items = manifest.get("action", {}).get("items", [])
+    return [(MANIFEST, f"action.items[{i}].keysSetting: must name a keys setting")
+            for i, item in enumerate(items)
+            if "keysSetting" in item and item["keysSetting"] not in names]
+
+
 def check_manifest_rules(ext_dir, manifest):
     return (check_id(ext_dir, manifest) + check_license(manifest)
-            + check_choice_settings(manifest))
+            + check_choice_settings(manifest) + check_keys_settings(manifest))

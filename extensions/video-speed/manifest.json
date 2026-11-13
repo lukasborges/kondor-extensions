@@ -5,7 +5,7 @@
   "name[pt_BR]": "Controle de Velocidade de Vídeo",
   "description": "Changes the playback speed of any video.",
   "description[pt_BR]": "Muda a velocidade de reprodução de qualquer vídeo.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Kondor contributors",
   "homepage": "https://github.com/lukasborges/kondor-extensions/tree/main/extensions/video-speed",
   "license": "GPL-3.0-or-later",
@@ -35,10 +35,14 @@
   ],
   "action": {
     "items": [
-      {"id": "slower", "title": "Slower", "title[pt_BR]": "Mais Lento"},
-      {"id": "faster", "title": "Faster", "title[pt_BR]": "Mais Rápido"},
-      {"id": "reset", "title": "Reset Speed", "title[pt_BR]": "Velocidade Normal"},
-      {"id": "show-overlay", "title": "Show Speed Overlay", "title[pt_BR]": "Mostrar Indicador de Velocidade", "checkable": true}
+      {"id": "slower", "title": "Slower", "title[pt_BR]": "Mais Lento",
+       "icon": "media-seek-backward", "keysSetting": "keySlower"},
+      {"id": "faster", "title": "Faster", "title[pt_BR]": "Mais Rápido",
+       "icon": "media-seek-forward", "keysSetting": "keyFaster"},
+      {"id": "reset", "title": "Reset Speed", "title[pt_BR]": "Velocidade Normal",
+       "icon": "edit-undo", "keysSetting": "keyReset"},
+      {"id": "show-overlay", "title": "Show Speed Overlay", "title[pt_BR]": "Mostrar Indicador de Velocidade", "checkable": true,
+       "keysSetting": "keyOverlay"}
     ],
     "siteToggle": true
   }
